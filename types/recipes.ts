@@ -1,16 +1,19 @@
 //- types/recipes.ts
 
-export type Recipe = {
+export interface Recipe {
   id: number;
   name: string;
+  difficulty: "Easy" | "Medium" | "Hard";
+  cuisine: string;
+};
+
+export interface RecipeDetail extends Recipe {
   ingredients: string[];
   instructions: string[];
   prepTimeMinutes: number;
   cookTimeMinutes: number;
   servings: number;
-  difficulty: string;
-  cuisine: string;
-  caloriesPerServing: string;
+  caloriesPerServing: number;
   tags: string[];
   userId: number;
   image: string;

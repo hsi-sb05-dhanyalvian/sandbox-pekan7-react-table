@@ -1,4 +1,7 @@
-"use client";
+//- components/data-table.tsx
+
+'use client';
+
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -11,7 +14,8 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table";
-import React from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import React, { useState } from "react";
 
 export type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -39,6 +43,10 @@ export function DataTable<TData, TValue>({
       columnFilters,
       globalFilter,
       columnVisibility,
+      pagination: {
+        pageIndex: 0,
+        pageSize: 15,
+      }
     },
     getCoreRowModel: getCoreRowModel(),
     onGlobalFilterChange: setGlobalFilter,
@@ -47,15 +55,17 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onColumnFiltersChange: setColumnFilters,
+    // onPaginationChange: () => {},
+    // manualPagination: false,
   });
 
   return (
     <div className="space-y-4">
-      <div className="flex flex-col  gap-3 md:justify-between md:items-center md:flex-row">
+      <div className="flex flex-col gap-3 md:justify-between md:items-center md:flex-row">
         <input
           onChange={(e) => setGlobalFilter(e.target.value)}
           placeholder="Search all columns..."
-          className="w-full md:w-72 rounded-md border border-gray-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
+          className="w-full md:w-72 rounded-md border border-stone-200 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-gray-400"
         />
 
         <div className="flex flex-wrap items-center gap-3">
@@ -79,15 +89,15 @@ export function DataTable<TData, TValue>({
         </div>
       </div>
 
-      <div className="overflow-x-auto rounded-xl border border-gray-200">
+      <div className="overflow-x-auto rounded-xl border border-stone-200 shadow-xs">
         <table className="w-full text-left text-sm">
-          <thead className="bg-gray-50">
+          <thead className="bg-neutral-100">
             {table.getHeaderGroups().map((headerGroup) => (
-              <tr key={headerGroup.id}>
+              <tr key={headerGroup.id} className="border-b border-b-stone-200">
                 {headerGroup.headers.map((header) => (
                   <th
                     key={header.id}
-                    className="px-4 py-3 font-medium"
+                    className="px-4 py-3 font-semibold uppercase"
                     onClick={
                       header.column.getCanSort()
                         ? header.column.getToggleSortingHandler()
@@ -110,38 +120,77 @@ export function DataTable<TData, TValue>({
               </tr>
             ))}
           </thead>
+
           <tbody>
             {table.getRowModel().rows.map((row) => (
-              <tr key={row.id} className="even:bg-gray-50/50">
+              <tr key={row.id} className="bg-white even:bg-neutral-50">
                 {row.getVisibleCells().map((cell) => (
-                  <td key={cell.id} className="px-4 py-3">
+                  <td key={cell.id} className="px-3 py-2.5">
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </td>
                 ))}
               </tr>
             ))}
           </tbody>
+
+          <tfoot>
+            <tr>
+              <td colSpan={table.getVisibleFlatColumns().length}>
+                <div className="flex items-center justify-between bg-gray-50 px-3 py-3 border-t border-t-stone-200">
+                  <div className="text-sm">
+                    Page <strong>{table.getState().pagination.pageIndex + 1}</strong> of{" "}
+                    <strong>{table.getPageCount().toLocaleString()}</strong>
+                  </div>
+
+                  <div className="inline-flex items-center rounded-full border border-gray-300 divider divide-gray-300">
+                    <button
+                      onClick={() => table.previousPage()}
+                      disabled={!table.getCanPreviousPage()}
+                      className="flex input-button-secondary px-1.5 py-1.5 gap-1 rounded-l-full"
+                    >
+                      <ChevronLeft size={16} />
+                      <span className="pr-1.5">Prev</span>
+                    </button>
+                    <button
+                      onClick={() => table.nextPage()}
+                      disabled={!table.getCanNextPage()}
+                      className="flex input-button-secondary px-1.5 py-1.5 gap-1 rounded-r-full"
+                    >
+                      <span className="pl-1.5">Next</span>
+                      <ChevronRight size={16} />
+                    </button>
+                  </div>
+                </div>
+              </td>
+            </tr>
+          </tfoot>
         </table>
-        <div className="flex items-center justify-between">
-          <div>
-            Show {table.getRowModel().rows.length} of{" "}
-            {table.getFilteredRowModel().rows.length}
+
+        {/* <div className="flex items-center justify-between bg-gray-50 px-3 py-3 border-t border-t-stone-200">
+          <div className="text-sm">
+            Page <strong>{table.getState().pagination.pageIndex + 1}</strong> of{" "}
+            <strong>{table.getPageCount().toLocaleString()}</strong>
           </div>
-          <div className="flex items-center mr-4  gap-2 ">
+
+          <div className="inline-flex items-center rounded-full border border-gray-300 divider divide-gray-300">
             <button
-              className="px-2 py-1 rounded-md bg-gray-200"
               onClick={() => table.previousPage()}
+              disabled={!table.getCanPreviousPage()}
+              className="flex input-button-secondary px-1.5 py-1.5 gap-1 rounded-l-full"
             >
-              Prev
+              <ChevronLeft size={16} />
+              <span className="pr-1.5">Prev</span>
             </button>
             <button
-              className="px-2 py-1 rounded-md bg-gray-200"
               onClick={() => table.nextPage()}
+              disabled={!table.getCanNextPage()}
+              className="flex input-button-secondary px-1.5 py-1.5 gap-1 rounded-r-full"
             >
-              Next
+              <span className="pl-1.5">Next</span>
+              <ChevronRight size={16} />
             </button>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

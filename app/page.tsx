@@ -6,9 +6,13 @@ import { userMockup } from "@/libs/data";
 
 export default function Home() {
   return (
-    <main className="mx-auto max-w-5xl p-6">
-      <h1 className="text-xl font-black">Belajar Data Table</h1>
-      <DataTable columns={columns} data={userMockup?.map((a)=>({...a,name:`${a.name}|${a.username}`}))} pageSize={12} />
-      </main>
+    <>
+      <h1 className="text-2xl font-semibold mb-4">Manage Recipes</h1>
+      <DataTable
+        columns={columns}
+        data={userMockup?.map((a) => ({ ...a, name: `${a.name}|${a.username}` }))}
+        pageSize={12}
+      />
+    </>
   );
 }
