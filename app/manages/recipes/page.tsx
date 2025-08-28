@@ -4,8 +4,8 @@
 
 import { DataTable } from "@/components/table/table";
 import { columns } from "./column";
-import { ApiClient, ApiLimit } from "@/libs/api";
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import { ApiClient } from "@/libs/api";
+import { useQuery } from "@tanstack/react-query";
 import { RecipeResponse } from "./type";
 import React from "react";
 

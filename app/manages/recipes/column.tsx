@@ -12,7 +12,7 @@ export const columns: ColumnDef<Recipe>[] = [
     accessorKey: "image",
     header: "Image",
     size: 90,
-    cell: ({ row }: any) => (
+    cell: ({ row }) => (
       <Image
         priority={true}
         src={row.original.image}

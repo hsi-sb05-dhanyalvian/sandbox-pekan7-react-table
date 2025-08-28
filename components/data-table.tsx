@@ -15,7 +15,7 @@ import {
   VisibilityState,
 } from "@tanstack/react-table";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import React, { useState } from "react";
+import React from "react";
 
 export type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
@@ -165,32 +165,6 @@ export function DataTable<TData, TValue>({
             </tr>
           </tfoot>
         </table>
-
-        {/* <div className="flex items-center justify-between bg-gray-50 px-3 py-3 border-t border-t-stone-200">
-          <div className="text-sm">
-            Page <strong>{table.getState().pagination.pageIndex + 1}</strong> of{" "}
-            <strong>{table.getPageCount().toLocaleString()}</strong>
-          </div>
-
-          <div className="inline-flex items-center rounded-full border border-gray-300 divider divide-gray-300">
-            <button
-              onClick={() => table.previousPage()}
-              disabled={!table.getCanPreviousPage()}
-              className="flex input-button-secondary px-1.5 py-1.5 gap-1 rounded-l-full"
-            >
-              <ChevronLeft size={16} />
-              <span className="pr-1.5">Prev</span>
-            </button>
-            <button
-              onClick={() => table.nextPage()}
-              disabled={!table.getCanNextPage()}
-              className="flex input-button-secondary px-1.5 py-1.5 gap-1 rounded-r-full"
-            >
-              <span className="pl-1.5">Next</span>
-              <ChevronRight size={16} />
-            </button>
-          </div>
-        </div> */}
       </div>
     </div>
   );

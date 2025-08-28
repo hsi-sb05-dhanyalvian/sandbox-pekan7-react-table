@@ -1,6 +1,5 @@
 //- components/table/search.tsx
 
-import { useState } from "react";
 import { Search, X } from "lucide-react";
 
 interface GlobalSearchProps {
