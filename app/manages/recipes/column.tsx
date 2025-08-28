@@ -2,11 +2,11 @@
 
 'use client';
 
-import { RecipeDetail } from "@/types/recipes";
 import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
+import { Recipe } from "./type";
 
-export const columns: ColumnDef<RecipeDetail>[] = [
+export const columns: ColumnDef<Recipe>[] = [
   {
     accessorKey: "name",
     header: "Name",

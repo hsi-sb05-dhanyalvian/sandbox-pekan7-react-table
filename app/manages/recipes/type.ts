@@ -5,10 +5,11 @@ export interface Recipe {
   name: string;
   difficulty: "Easy" | "Medium" | "Hard";
   cuisine: string;
+  mealType: string[];
+  ingredients: string[];
 };
 
 export interface RecipeDetail extends Recipe {
-  ingredients: string[];
   instructions: string[];
   prepTimeMinutes: number;
   cookTimeMinutes: number;
@@ -19,5 +20,11 @@ export interface RecipeDetail extends Recipe {
   image: string;
   rating: number;
   reviewCount: number;
-  mealType: string[];
+};
+
+export interface RecipeResponse {
+  recipes: Recipe[];
+  total: number;
+  skip: number;
+  limit: number;
 };

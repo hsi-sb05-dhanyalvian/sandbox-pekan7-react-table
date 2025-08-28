@@ -26,8 +26,7 @@ body {
 
 .input-button-primary {
   @apply bg-button hover:bg-button-hover
-    text-xs text-white
-    font-semibol
+    text-sm text-white font-semibold
     rounded-full border border-gray-300
     cursor-pointer shadow-xs hover:shadow-md
     transition-all duration-300

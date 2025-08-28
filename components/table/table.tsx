@@ -13,7 +13,7 @@ import {
   useReactTable,
   VisibilityState,
 } from "@tanstack/react-table";
-import React, { useState } from "react";
+import React from "react";
 import Thead from "./thead";
 import Tbody from "./tbody";
 import Tfoot from "./tfoot";
@@ -23,14 +23,21 @@ import GlobalSearch from "./search";
 export type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  pageSize: number;
+  perPage: number;
+  totalRows: number;
+  currPage: number;
 };
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  pageSize,
+  perPage,
+  totalRows,
+  currPage,
 }: DataTableProps<TData, TValue>) {
+  // const [pageIndex, setPageIndex] = useState(0);
+  // const [pageSize, setPageSize] = useState([perPage]);
+  
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
     []
@@ -44,8 +51,7 @@ export function DataTable<TData, TValue>({
     setGlobalFilter("");
   };
   
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({});
+  const [columnVisibility] = React.useState<VisibilityState>({});
 
   const table = useReactTable({
     data: data,
@@ -63,7 +69,7 @@ export function DataTable<TData, TValue>({
     initialState: {
       pagination: {
         pageIndex: 0,
-        pageSize: pageSize,
+        pageSize: perPage,
       }
     },
     // defaultColumn: {
@@ -79,7 +85,7 @@ export function DataTable<TData, TValue>({
     getPaginationRowModel: getPaginationRowModel(),
     onColumnFiltersChange: setColumnFilters,
     // onPaginationChange: () => {},
-    // manualPagination: false,
+    manualPagination: true,
   });
 
   return (
@@ -93,7 +99,7 @@ export function DataTable<TData, TValue>({
 
         <div className="flex flex-wrap items-center gap-3">
           <button className="flex input-button-primary px-3 py-2 gap-1">
-            <CirclePlus size={18} />
+            <CirclePlus size={18} className="items-center" />
             <div className="flex text-md items-center mr-0.5">Add</div>
           </button>
         </div>
@@ -105,7 +111,7 @@ export function DataTable<TData, TValue>({
 
           <Tbody table={table} />
 
-          <Tfoot table={table} totalRows={data.length}/>
+          <Tfoot table={table} totalRows={totalRows}/>
         </table>
       </div>
     </div>

@@ -42,8 +42,6 @@ const Tfoot = <TData,>({ table, totalRows }: TfootProps<TData>) => {
             <div className="text-sm">
               Showing <b>{startRow}</b> to <b>{endRow}</b> of <b>{totalRows}</b>{" "}
               results
-              {/* Page <strong>{table.getState().pagination.pageIndex + 1}</strong> of{" "}
-              <strong>{table.getPageCount().toLocaleString()}</strong> */}
             </div>
 
             <div className="inline-flex items-center rounded-full border border-gray-300">
@@ -69,7 +67,6 @@ const Tfoot = <TData,>({ table, totalRows }: TfootProps<TData>) => {
                   key={i}
                   onClick={() => table.setPageIndex(i)}
                   disabled={i === pageIndex}
-                  // className={`px-3 py-1 border rounded ${i === pageIndex ? "bg-blue-500 text-white" : ""}`}
                   className={`flex input-button-secondary px-1.5 py-1.5 gap-1 ${i === pageIndex ? 'underline font-bold' : ''}`}
                 >
                   <span className="px-1.5">{i + 1}</span>

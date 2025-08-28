@@ -5,6 +5,7 @@ import { Inter, JetBrains_Mono } from "next/font/google";
 import MainSidebar from "@/components/main-sidebar";
 import MainFooter from "@/components/main-footer";
 import "./globals.css";
+import ReactQueryProvider from "./provider";
 
 const fontSans = Inter({
   variable: "--font-inter",
@@ -29,17 +30,19 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${fontSans.variable} ${fontMono.variable} antialiased`}>
-        <div className="flex min-h-screen">
-          <MainSidebar />
+        <ReactQueryProvider>
+          <div className="flex min-h-screen">
+            <MainSidebar />
 
-          <div className="ml-64 p-6 w-full">
-            <main className="flex-1">
-              {children}
-            </main>
+            <div className="ml-64 p-6 w-full">
+              <main className="flex-1">
+                {children}
+              </main>
 
-            <MainFooter />
+              <MainFooter />
+            </div>
           </div>
-        </div>
+        </ReactQueryProvider>
       </body>
     </html>
   );
