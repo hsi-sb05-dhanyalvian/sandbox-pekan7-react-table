@@ -3,42 +3,48 @@
 'use client';
 
 import { DataTable } from "@/components/table/table";
-// import { userMockup } from "@/libs/data";
 import { columns } from "./column";
-// import { recipeMockup } from "./data";
 import { ApiClient, ApiLimit } from "@/libs/api";
-// import { RecipesResponse } from "@/types/recipes";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { RecipeResponse } from "./type";
-// import { QueryStrings } from "@/libs/query";
+import React from "react";
 
-// const PageCurrent = (): number => {
-//   const { page } = QueryStrings();
-//   return page;
-// };
-
-const currPage = 2;
-const skip = (currPage - 1) * ApiLimit;
-
-const ApiRecipes = async (): Promise<RecipeResponse> => {
-  const { data } = await ApiClient.get('/recipes', {
+const ApiRecipes = async (
+  page: number,
+  limit: number,
+  globalFilter: string
+): Promise<RecipeResponse> => {
+  const skip = (page - 1) * limit;
+  const { data } = await ApiClient.get('/recipes/search', {
     params: {
-      select: 'name,difficulty,cuisine,mealType,ingredients',
-      limit: ApiLimit,
+      q: globalFilter,
+      select: 'name,difficulty,cuisine,mealType,ingredients,image',
+      limit: limit,
       skip: skip,
+      // delay: 3000,
     }
   });
   return data;
 }
 
 const ManageRecipesPage = () => {
-  const { data, isLoading, isError, error } = useQuery({
-    queryKey: ['manages', 'recipes'],
-    queryFn: ApiRecipes,
+  const [page, setPage] = React.useState(1);
+  const [globalFilter, setGlobalFilter] = React.useState("");
+  const [debouncedFilter, setDebouncedFilter] = React.useState(globalFilter);
+  const perPage = 6;
+  
+  React.useEffect(() => {
+    const handler = setTimeout(() => {
+      setDebouncedFilter(globalFilter);
+    }, 1000);
+    return () => clearTimeout(handler);
+  }, [globalFilter]);
+  
+  const { data, isLoading } = useQuery({
+    queryKey: ['manages', 'recipes', page, debouncedFilter],
+    queryFn: () => ApiRecipes(page, perPage, debouncedFilter),
+    // enabled: true,
   });
-
-  if (isLoading) return <div>Loading...</div>;
-  if (isError) return <div>Error: {error.message}</div>;
 
   return (
     <>
@@ -46,9 +52,14 @@ const ManageRecipesPage = () => {
       <DataTable
         columns={columns}
         data={data?.recipes || []}
-        perPage={ApiLimit}
-        currPage={currPage}
+        pageSize={perPage}
         totalRows={data?.total || 0}
+        page={page}
+        setPage={setPage}
+        globalFilter={globalFilter}
+        setGlobalFilter={setGlobalFilter}
+        loading={isLoading}
+        searchPlaceholder="Search by name"
       />
     </>
   );

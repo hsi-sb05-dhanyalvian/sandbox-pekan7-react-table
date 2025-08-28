@@ -1,21 +1,33 @@
 //- components/table/tfoot.tsx
 
 import { Table } from "@tanstack/react-table";
-import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight, Ellipsis } from "lucide-react";
 
 interface TfootProps<TData> {
   table: Table<TData>;
   totalRows: number;
+  page: number;
+  setPage: (page: number) => void;
+  totalPages: number;
+  pageSize: number;
+  loading?: boolean;
 }
 
-const Tfoot = <TData,>({ table, totalRows }: TfootProps<TData>) => {
+const Tfoot = <TData,>({
+  table,
+  totalRows,
+  page,
+  setPage,
+  totalPages,
+  pageSize,
+  loading,
+}: TfootProps<TData>) => {
   const iconSize = 16;
-  const pageIndex = table.getState().pagination.pageIndex;
-  const pageSize = table.getState().pagination.pageSize;
-  const pageCount = table.getPageCount();
-  const startRow = pageIndex * pageSize + 1;
-  const endRow = Math.min((pageIndex + 1) * pageSize, totalRows);
-  
+  const pageIndex = page;
+  const pageCount = totalPages;
+  const startRow = (pageIndex - 1) * pageSize + 1;
+  const endRow = Math.min(pageIndex * pageSize, totalRows);
+
   const windowSize = 5;
   const half = Math.floor(windowSize / 2);
   let start = Math.max(0, pageIndex - half);
@@ -46,44 +58,54 @@ const Tfoot = <TData,>({ table, totalRows }: TfootProps<TData>) => {
 
             <div className="inline-flex items-center rounded-full border border-gray-300">
               <button
-                onClick={() => table.setPageIndex(0)}
-                disabled={!table.getCanPreviousPage()}
+                onClick={() => setPage(1)}
+                disabled={loading || pageIndex === 1}
                 className="flex input-button-secondary px-1.5 py-1.5 gap-1 rounded-l-full"
               >
                 <ChevronsLeft size={iconSize} />
                 <span className="pr-1.5">First</span>
               </button>
               <button
-                onClick={() => table.previousPage()}
-                disabled={!table.getCanPreviousPage()}
+                onClick={() => setPage(Math.max(1, pageIndex - 1))}
+                disabled={loading || pageIndex === 1}
                 className="flex input-button-secondary px-1.5 py-1.5 gap-1"
               >
                 <ChevronLeft size={iconSize} />
                 <span className="pr-1.5">Prev</span>
               </button>
 
-              {visiblePages.map((i) => (
+              {loading ? (
                 <button
-                  key={i}
-                  onClick={() => table.setPageIndex(i)}
-                  disabled={i === pageIndex}
-                  className={`flex input-button-secondary px-1.5 py-1.5 gap-1 ${i === pageIndex ? 'underline font-bold' : ''}`}
+                  className="flex input-button-secondary px-1.5 py-1.5 gap-1"
+                  disabled={true}
                 >
-                  <span className="px-1.5">{i + 1}</span>
+                  <Ellipsis size={iconSize} className="text-blue-500 animate-pulse" />
+                  {/* <div className="w-4 h-4 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div> */}
                 </button>
-              ))}
+              ) : (
+                visiblePages.map((i) => (
+                  <button
+                    key={i + 1}
+                    onClick={() => setPage(i + 1)}
+                    disabled={loading || (i + 1) === pageIndex}
+                    className={`flex input-button-secondary px-1.5 py-1.5 gap-1 ${i + 1 === pageIndex ? 'underline font-bold' : ''}`}
+                  >
+                    <span className="px-1.5">{i + 1}</span>
+                  </button>
+                ))
+              )}
 
               <button
-                onClick={() => table.nextPage()}
-                disabled={!table.getCanNextPage()}
+                onClick={() => setPage(Math.min(pageCount, pageIndex + 1))}
+                disabled={loading || pageIndex >= pageCount}
                 className="flex input-button-secondary px-1.5 py-1.5 gap-1"
               >
                 <span className="pl-1.5">Next</span>
                 <ChevronRight size={iconSize} />
               </button>
               <button
-                onClick={() => table.setPageIndex(pageCount - 1)}
-                disabled={!table.getCanNextPage()}
+                onClick={() => setPage(pageCount)}
+                disabled={loading || pageIndex >= pageCount}
                 className="flex input-button-secondary px-1.5 py-1.5 gap-1 rounded-r-full"
               >
                 <span className="pl-1.5">Last</span>

@@ -24,6 +24,11 @@ body {
   font-optical-sizing: auto;
 }
 
+.input-text,
+.input-button {
+  @apply disabled:bg-white/50 disabled:text-gray-500/50;
+}
+
 .input-button-primary {
   @apply bg-button hover:bg-button-hover
     text-sm text-white font-semibold
@@ -41,4 +46,8 @@ body {
     cursor-pointer shadow-xs hover:shadow-md
     transition-all duration-300
     disabled:bg-white/50 disabled:text-gray-500/50;
+}
+
+.disabled {
+  @apply bg-white/50 text-gray-500/50;
 }

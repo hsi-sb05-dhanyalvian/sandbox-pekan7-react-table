@@ -7,6 +7,7 @@ export interface Recipe {
   cuisine: string;
   mealType: string[];
   ingredients: string[];
+  image: string;
 };
 
 export interface RecipeDetail extends Recipe {
@@ -17,7 +18,6 @@ export interface RecipeDetail extends Recipe {
   caloriesPerServing: number;
   tags: string[];
   userId: number;
-  image: string;
   rating: number;
   reviewCount: number;
 };

@@ -23,35 +23,42 @@ import GlobalSearch from "./search";
 export type DataTableProps<TData, TValue> = {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
-  perPage: number;
+  pageSize: number;
   totalRows: number;
-  currPage: number;
+  page: number;
+  setPage: (page: number) => void;
+  globalFilter: string;
+  setGlobalFilter: (value: string) => void;
+  loading?: boolean;
+  searchPlaceholder?: string;
 };
 
 export function DataTable<TData, TValue>({
   columns,
   data,
-  perPage,
+  pageSize,
   totalRows,
-  currPage,
+  page,
+  setPage,
+  globalFilter,
+  setGlobalFilter,
+  loading = false,
+  searchPlaceholder,
 }: DataTableProps<TData, TValue>) {
-  // const [pageIndex, setPageIndex] = useState(0);
-  // const [pageSize, setPageSize] = useState([perPage]);
-  
   const [sorting, setSorting] = React.useState<SortingState>([]);
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  );
-  
-  const [globalFilter, setGlobalFilter] = React.useState("");
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+
   const handleGlobalFilterChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setGlobalFilter(e.target.value);
+    setPage(1);
   };
   const handleGlobalFilterClear = () => {
-    setGlobalFilter("");
+    setGlobalFilter('');
+    setPage(1);
   };
-  
+
   const [columnVisibility] = React.useState<VisibilityState>({});
+  const totalPages = Math.ceil(totalRows / pageSize);
 
   const table = useReactTable({
     data: data,
@@ -61,22 +68,7 @@ export function DataTable<TData, TValue>({
       columnFilters,
       globalFilter,
       columnVisibility,
-      // pagination: {
-      //   pageIndex: 0,
-      //   pageSize: 15,
-      // }
     },
-    initialState: {
-      pagination: {
-        pageIndex: 0,
-        pageSize: perPage,
-      }
-    },
-    // defaultColumn: {
-    //   size: 30,
-    //   minSize: 30,
-    //   maxSize: 400,
-    // },
     getCoreRowModel: getCoreRowModel(),
     onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
@@ -84,17 +76,19 @@ export function DataTable<TData, TValue>({
     getSortedRowModel: getSortedRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onColumnFiltersChange: setColumnFilters,
-    // onPaginationChange: () => {},
     manualPagination: true,
+    pageCount: totalPages,
   });
 
   return (
     <div className="space-y-4">
       <div className="flex flex-row gap-3 justify-between items-center">
         <GlobalSearch
+          placeholder={searchPlaceholder}
           value={globalFilter}
           onChange={handleGlobalFilterChange}
           onClear={handleGlobalFilterClear}
+          loading={loading}
         />
 
         <div className="flex flex-wrap items-center gap-3">
@@ -109,9 +103,17 @@ export function DataTable<TData, TValue>({
         <table className="w-full text-left text-sm">
           <Thead table={table} />
 
-          <Tbody table={table} />
+          <Tbody table={table} columns={columns} loading={loading} />
 
-          <Tfoot table={table} totalRows={totalRows}/>
+          <Tfoot
+            table={table}
+            totalRows={totalRows}
+            page={page}
+            setPage={setPage}
+            totalPages={totalPages}
+            pageSize={pageSize}
+            loading={loading}
+          />
         </table>
       </div>
     </div>

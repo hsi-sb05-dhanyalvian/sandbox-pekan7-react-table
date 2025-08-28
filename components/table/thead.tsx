@@ -18,7 +18,6 @@ const Thead = <TData,>({ table }: TheadProps<TData>) => {
             <th
               key={header.id}
               className="px-3 py-3 font-bold first:pl-6 last:pr-6"
-              // style={{ width: header.column.getSize() }}
               style={{ width: `${header.getSize()}px` }}
               onClick={
                 header.column.getCanSort()

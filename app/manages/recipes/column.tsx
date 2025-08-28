@@ -2,11 +2,27 @@
 
 'use client';
 
-import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
+import Image from "next/image";
+import { ColumnDef } from "@tanstack/react-table";
 import { Recipe } from "./type";
 
 export const columns: ColumnDef<Recipe>[] = [
+  {
+    accessorKey: "image",
+    header: "Image",
+    size: 90,
+    cell: ({ row }: any) => (
+      <Image
+        priority={true}
+        src={row.original.image}
+        alt={row.original.name}
+        className="object-cover border border-stone-200 rounded-xl"
+        width={72}
+        height={72}
+      />
+    ),
+  },
   {
     accessorKey: "name",
     header: "Name",
@@ -52,7 +68,7 @@ export const columns: ColumnDef<Recipe>[] = [
   {
     accessorKey: "ingredients",
     header: "Ingredients",
-    size: 200,
+    size: 250,
     cell: ({ row }) => {
       const ingredients = row.original.ingredients;
       return (
