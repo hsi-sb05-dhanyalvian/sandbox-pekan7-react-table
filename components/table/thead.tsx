@@ -17,8 +17,9 @@ const Thead = <TData,>({ table }: TheadProps<TData>) => {
           {headerGroup.headers.map((header) => (
             <th
               key={header.id}
-              className="px-3 py-3 font-bold first:pl-6 last:pr-6"
-              style={{ width: `${header.getSize()}px` }}
+              className="px-3 py-3 first:pl-4 last:pr-4 font-bold"
+              style={header.getSize() > 5 ? { width: `${header.getSize()}px` } : undefined}
+              // style={{ width: `${header.getSize()}px` }}
               onClick={
                 header.column.getCanSort()
                   ? header.column.getToggleSortingHandler()

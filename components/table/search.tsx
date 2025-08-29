@@ -20,10 +20,10 @@ const GlobalSearch = ({
   const iconSize = 18;
   
   return (
-    <div className="relative w-72">
+    <div className="relative w-72 group">
       {/* Search Icon */}
       <Search
-        className={`${loading ? 'disabled' : ''} absolute left-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer`}
+        className={`${loading ? 'disabled' : ''} absolute left-2 top-1/2 -translate-y-1/2 text-stone-500 hover:text-stone-700 cursor-pointer`}
         size={iconSize}
       />
 
@@ -34,14 +34,14 @@ const GlobalSearch = ({
         value={value}
         onChange={onChange}
         disabled={loading}
-        className="input-text w-full pl-8 pr-10 py-1.5 border border-gray-300 rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-gray-100 shadow-xs"
+        className="input-text w-full pl-8 pr-10 py-1.5 border border-stone-200 rounded-full text-sm text-stone-500 focus:text-stone-700 focus:outline-none focus:ring-2 focus:ring-stone-100 shadow-xs"
       />
 
       {/* Clear Button */}
       {value && (
         <button
           onClick={onClear}
-          className={`${loading ? 'disabled' : ''} absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 cursor-pointer`}
+          className={`${loading ? 'disabled' : ''} absolute right-2 top-1/2 -translate-y-1/2 text-stone-500 hover:text-stone-700 cursor-pointer`}
         >
           <X size={iconSize} />
         </button>

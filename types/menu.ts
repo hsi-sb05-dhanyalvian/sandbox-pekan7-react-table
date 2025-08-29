@@ -3,7 +3,7 @@
 interface Menu {
   icon: string;
   label: string;
-  href?: string;
+  path?: string;
 }
 
 export interface MenuItem extends Menu {

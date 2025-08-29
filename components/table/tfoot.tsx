@@ -49,14 +49,14 @@ const Tfoot = <TData,>({
   return (
     <tfoot className="bg-teal-50">
       <tr className="border-t border-t-stone-200">
-        <td colSpan={table.getVisibleFlatColumns().length}>
-          <div className="flex items-center justify-between px-3 py-3 first:pl-6 last:pr-6">
+        <td colSpan={table.getVisibleFlatColumns().length} className="px-3 py-3 first:pl-4 last:pr-4">
+          <div className="flex items-center justify-between">
             <div className="text-sm">
               Showing <b>{startRow}</b> to <b>{endRow}</b> of <b>{totalRows}</b>{" "}
               results
             </div>
 
-            <div className="inline-flex items-center rounded-full border border-gray-300">
+            <div className="inline-flex items-center rounded-full border border-stone-200">
               <button
                 onClick={() => setPage(1)}
                 disabled={loading || pageIndex === 1}

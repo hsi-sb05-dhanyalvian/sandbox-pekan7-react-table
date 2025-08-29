@@ -21,6 +21,7 @@ import { CirclePlus } from "lucide-react";
 import GlobalSearch from "./search";
 
 export type DataTableProps<TData, TValue> = {
+  title: string;
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   pageSize: number;
@@ -34,6 +35,7 @@ export type DataTableProps<TData, TValue> = {
 };
 
 export function DataTable<TData, TValue>({
+  title,
   columns,
   data,
   pageSize,
@@ -63,6 +65,11 @@ export function DataTable<TData, TValue>({
   const table = useReactTable({
     data: data,
     columns: columns,
+    defaultColumn: {
+      minSize: 5,
+      size: 100,
+      maxSize: 500,
+    },
     state: {
       sorting,
       columnFilters,
@@ -70,7 +77,7 @@ export function DataTable<TData, TValue>({
       columnVisibility,
     },
     getCoreRowModel: getCoreRowModel(),
-    onGlobalFilterChange: setGlobalFilter,
+    // onGlobalFilterChange: setGlobalFilter,
     getFilteredRowModel: getFilteredRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
@@ -78,44 +85,48 @@ export function DataTable<TData, TValue>({
     onColumnFiltersChange: setColumnFilters,
     manualPagination: true,
     pageCount: totalPages,
+    manualFiltering: true,
   });
 
   return (
-    <div className="space-y-4">
-      <div className="flex flex-row gap-3 justify-between items-center">
-        <GlobalSearch
-          placeholder={searchPlaceholder}
-          value={globalFilter}
-          onChange={handleGlobalFilterChange}
-          onClear={handleGlobalFilterClear}
-          loading={loading}
-        />
-
-        <div className="flex flex-wrap items-center gap-3">
-          <button className="flex input-button-primary px-3 py-2 gap-1">
-            <CirclePlus size={18} className="items-center" />
-            <div className="flex text-md items-center mr-0.5">Add</div>
-          </button>
-        </div>
-      </div>
-
-      <div className="overflow-x-auto rounded-xl border border-stone-200 shadow-xs">
-        <table className="w-full text-left text-sm">
-          <Thead table={table} />
-
-          <Tbody table={table} columns={columns} loading={loading} />
-
-          <Tfoot
-            table={table}
-            totalRows={totalRows}
-            page={page}
-            setPage={setPage}
-            totalPages={totalPages}
-            pageSize={pageSize}
+    <>
+      <h1 className="text-3xl font-semibold mb-4">{title}</h1>
+      <div className="space-y-4">
+        <div className="flex flex-row gap-3 justify-between items-center">
+          <GlobalSearch
+            placeholder={searchPlaceholder}
+            value={globalFilter}
+            onChange={handleGlobalFilterChange}
+            onClear={handleGlobalFilterClear}
             loading={loading}
           />
-        </table>
+
+          <div className="flex flex-wrap items-center gap-3">
+            <button className="flex input-button-primary px-3 py-2 gap-1">
+              <CirclePlus size={18} className="items-center" />
+              <div className="flex text-md items-center mr-0.5">Add</div>
+            </button>
+          </div>
+        </div>
+
+        <div className="relative overflow-x-auto rounded-xl border border-stone-200 shadow-xs">
+          <table className="w-full text-left text-sm">
+            <Thead table={table} />
+
+            <Tbody table={table} columns={columns} loading={loading} />
+
+            <Tfoot
+              table={table}
+              totalRows={totalRows}
+              page={page}
+              setPage={setPage}
+              totalPages={totalPages}
+              pageSize={pageSize}
+              loading={loading}
+            />
+          </table>
+        </div>
       </div>
-    </div>
+    </>
   );
 }

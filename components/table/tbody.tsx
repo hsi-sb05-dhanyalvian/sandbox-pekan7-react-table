@@ -17,7 +17,7 @@ const Tbody = <TData, TValue>({
     <tbody>
       {loading ? (
         <tr>
-          <td colSpan={columns.length} className="text-center py-4">
+          <td colSpan={columns.length} className="text-center px-3 py-3 first:pl-4 last:pr-4">
             <div className="flex justify-center items-center gap-2 min-h-72">
               <div className="w-5 h-5 border-2 border-gray-300 border-t-blue-500 rounded-full animate-spin"></div>
               <span className="text-blue-500">Loading...</span>
@@ -32,7 +32,7 @@ const Tbody = <TData, TValue>({
             {row.getVisibleCells().map((cell) => (
               <td
                 key={cell.id}
-                className="px-3 py-2.5 first:pl-6 last:pr-6 align-top"
+                className="px-3 py-2.5 first:pl-4 last:pr-4 align-top"
               >
                 {flexRender(cell.column.columnDef.cell, cell.getContext())}
               </td>
@@ -41,7 +41,7 @@ const Tbody = <TData, TValue>({
         ))
       ) : (
         <tr>
-          <td colSpan={columns.length} className="text-center text-sm py-4 text-gray-500">
+          <td colSpan={columns.length} className="text-center text-sm text-gray-500 px-3 py-4 first:pl-4 last:pr-4">
             No data found
           </td>
         </tr>

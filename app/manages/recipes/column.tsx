@@ -11,7 +11,7 @@ export const columns: ColumnDef<Recipe>[] = [
   {
     accessorKey: "image",
     header: "Image",
-    size: 90,
+    size: 130,
     cell: ({ row }) => (
       <Image
         priority={true}
@@ -26,7 +26,7 @@ export const columns: ColumnDef<Recipe>[] = [
   {
     accessorKey: "name",
     header: "Name",
-    size: 250,
+    size: 0,
     cell: ({ row }) => {
       const id = row.original.id;
       const name = row.original.name;
@@ -44,22 +44,23 @@ export const columns: ColumnDef<Recipe>[] = [
   {
     accessorKey: "cuisine",
     header: "Cuisine",
+    size: 170,
   },
   {
     accessorKey: "difficulty",
     header: "Difficulty",
-    size: 60,
+    size: 140,
   },
   {
     accessorKey: "mealType",
     header: "Meal Type",
-    size: 100,
+    size: 170,
     cell: ({ row }) => {
       const mealType = row.original.mealType;
       return (
-        <ul className="list-disc list-inside">
+        <ul className="table-ul">
           {mealType.map((item, idx) => (
-            <li key={idx}>{item}</li>
+            <li key={idx} className="table-ul-li">{item}</li>
           ))}
         </ul>
       );
@@ -68,13 +69,19 @@ export const columns: ColumnDef<Recipe>[] = [
   {
     accessorKey: "ingredients",
     header: "Ingredients",
-    size: 250,
+    size: 360,
     cell: ({ row }) => {
       const ingredients = row.original.ingredients;
       return (
-        <ul className="list-disc list-inside">
+        <ul className="table-ul">
           {ingredients.slice(0, 3).map((ingredient, idx) => (
-            <li key={idx}>{ingredient}</li>
+            <li
+              key={idx}
+              className="table-ul-li"
+              style={{ maxWidth: '360px' }}
+            >
+              {ingredient}
+            </li>
           ))}
           {ingredients.length > 3 ? (<li key={99} className="opacity-75">others...</li>) : ''}
         </ul>

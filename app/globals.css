@@ -39,13 +39,20 @@ body {
 }
 .input-button-secondary {
   @apply bg-white hover:bg-gray-50
-    text-xs text-gray-500
-    font-semibold hover:text-gray-600
-    border-r border-r-gray-300
+    text-xs text-stone-500
+    font-semibold hover:text-stone-700
+    border-r border-r-stone-200
     last:border-r-0
     cursor-pointer shadow-xs hover:shadow-md
     transition-all duration-300
-    disabled:bg-white/50 disabled:text-gray-500/50;
+    disabled:bg-white/50 disabled:text-gray-500/50 disabled:shadow-none disabled:cursor-default;
+}
+
+.table-ul {
+  @apply list-disc list-outside pl-4.5;
+}
+.table-ul-li {
+  @apply text-clip;
 }
 
 .disabled {

@@ -16,25 +16,31 @@ import {
 interface MenuIconProps {
   icon: string;
   label: string;
-  href?: string;
+  path?: string;
+  isActive: boolean;
+  isOpen?: boolean;
   submenu?: boolean;
   onClick?: () => void;
-  onClickVal?: boolean;
+  // onClickVal?: boolean;
 };
 
 export const MenuIcon = ({
   icon,
   label,
-  href = '',
+  path = '',
+  isActive,
+  isOpen = false,
   submenu = false,
   onClick,
-  onClickVal
 }: MenuIconProps) => {
   const size = 20;
 
   if (!submenu) {
     return (
-      <Link href={href} className="flex items-center gap-2 p-2 rounded hover:bg-gray-700 cursor-pointer">
+      <Link
+        href={path}
+        className={`flex items-center gap-2 p-2 rounded hover:bg-gray-700 ${isActive ? 'bg-gray-700 cursor-default' : 'cursor-pointer'}`}
+      >
         <GetIcon icon={icon} size={size} />
         <span>{label}</span>
       </Link>
@@ -44,7 +50,7 @@ export const MenuIcon = ({
   return (
     <button
       onClick={onClick}
-      className="flex w-full items-center justify-between p-2 rounded hover:bg-gray-700 cursor-pointer"
+      className="flex w-full items-center justify-between p-2 rounded hover:bg-gray-700  transition-colors cursor-pointer"
     >
       <div className="flex items-center gap-2">
         <GetIcon icon={icon} size={size} />
@@ -52,7 +58,7 @@ export const MenuIcon = ({
       </div>
       <ChevronDown
         size={18}
-        className={`transition-transform ${onClickVal ? "rotate-180" : ""}`}
+        className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
       />
     </button>
   );
@@ -61,14 +67,18 @@ export const MenuIcon = ({
 interface SubMenuIconProps {
   icon: string;
   label: string;
-  href: string;
+  path?: string;
+  isSubActive: boolean;
 };
 
-export const SubMenuIcon = ({ icon, label, href }: SubMenuIconProps) => {
+export const SubMenuIcon = ({ icon, label, path = '', isSubActive }: SubMenuIconProps) => {
   const size = 16;
-  
+
   return (
-    <Link href={href} className="flex items-center gap-2 p-2 rounded hover:bg-gray-700">
+    <Link
+      href={path}
+      className={`flex items-center gap-2 p-2 rounded hover:bg-gray-700 ${isSubActive ? 'bg-gray-700 cursor-default' : ''}`}
+    >
       <GetIcon icon={icon} size={size} />
       <span>{label}</span>
     </Link>
@@ -80,9 +90,9 @@ interface GetIconProps {
   size: number;
 }
 
-const GetIcon = ({icon, size}: GetIconProps) => {
+const GetIcon = ({ icon, size }: GetIconProps) => {
   let result;
-  
+
   switch (icon) {
     case 'dashboard':
       result = <LayoutDashboard size={size} />;
@@ -106,6 +116,6 @@ const GetIcon = ({icon, size}: GetIconProps) => {
       result = <Users size={size} />;
       break;
   }
-  
+
   return result;
 };
