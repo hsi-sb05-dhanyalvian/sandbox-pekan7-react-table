@@ -90,7 +90,7 @@ export function DataTable<TData, TValue>({
 
   return (
     <>
-      <h1 className="text-3xl font-semibold mb-4">{title}</h1>
+      <div className="min-h-12 text-3xl font-semibold mb-4">{title}</div>
       <div className="space-y-4">
         <div className="flex flex-row gap-3 justify-between items-center">
           <GlobalSearch

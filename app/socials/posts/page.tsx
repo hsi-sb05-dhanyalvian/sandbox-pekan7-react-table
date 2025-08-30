@@ -1,28 +1,28 @@
-//- app/manages/recipes/page.tsx
+//- app/socials/posts/page.tsx
 
 'use client';
 
+import React from "react";
+import { ApiClient } from "@/libs/api";
+import { PostResponse } from "./type";
+import { ScrollToTop } from "@/libs/util";
+import { useQuery } from "@tanstack/react-query";
 import { DataTable } from "@/components/table/table";
 import { columns } from "./column";
-import { ApiClient } from "@/libs/api";
-import { useQuery } from "@tanstack/react-query";
-import { RecipeResponse } from "./type";
-import React from "react";
-import { ScrollToTop } from "@/libs/util";
 
-const ApiRecipes = async (
+const ApiPosts = async (
   page: number,
   limit: number,
   globalFilter: string
-): Promise<RecipeResponse> => {
+): Promise<PostResponse> => {
   const skip = (page - 1) * limit;
-  const { data } = await ApiClient.get('/recipes/search', {
+  const { data } = await ApiClient.get('/posts/search', {
     params: {
       q: globalFilter,
-      select: 'image,name,difficulty,cuisine,mealType,ingredients,rating',
+      // select: 'image,name,difficulty,cuisine,mealType,ingredients',
       limit: limit,
       skip: skip,
-      // delay: 5000,
+      // delay: 3000,
     }
   });
   ScrollToTop();
@@ -30,7 +30,7 @@ const ApiRecipes = async (
   return data;
 }
 
-const PageManageRecipes = () => {
+const SocialPostsPage = () => {
   const [page, setPage] = React.useState(1);
   const [globalFilter, setGlobalFilter] = React.useState("");
   const [debouncedFilter, setDebouncedFilter] = React.useState(globalFilter);
@@ -44,15 +44,15 @@ const PageManageRecipes = () => {
   }, [globalFilter]);
 
   const { data, isLoading } = useQuery({
-    queryKey: ['manages', 'recipes', page, debouncedFilter],
-    queryFn: () => ApiRecipes(page, perPage, debouncedFilter),
+    queryKey: ['socials', 'posts', page, debouncedFilter],
+    queryFn: () => ApiPosts(page, perPage, debouncedFilter),
   });
 
   return (
     <DataTable
-      title="Manage Recipes"
+      title="Social Posts"
       columns={columns}
-      data={data?.recipes || []}
+      data={data?.posts || []}
       pageSize={perPage}
       totalRows={data?.total || 0}
       page={page}
@@ -60,9 +60,9 @@ const PageManageRecipes = () => {
       globalFilter={globalFilter}
       setGlobalFilter={setGlobalFilter}
       loading={isLoading}
-      searchPlaceholder="Search by name"
+      searchPlaceholder="Search by body"
     />
   );
 };
 
-export default PageManageRecipes;
+export default SocialPostsPage;

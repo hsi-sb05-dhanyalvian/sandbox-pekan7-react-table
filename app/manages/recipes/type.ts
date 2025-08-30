@@ -1,5 +1,7 @@
 //- types/recipes.ts
 
+import { BaseResponse } from "@/app/type";
+
 export interface Recipe {
   id: number;
   name: string;
@@ -8,6 +10,8 @@ export interface Recipe {
   mealType: string[];
   ingredients: string[];
   image: string;
+  tags: string[];
+  rating: number;
 };
 
 export interface RecipeDetail extends Recipe {
@@ -16,15 +20,10 @@ export interface RecipeDetail extends Recipe {
   cookTimeMinutes: number;
   servings: number;
   caloriesPerServing: number;
-  tags: string[];
   userId: number;
-  rating: number;
   reviewCount: number;
 };
 
-export interface RecipeResponse {
+export interface RecipeResponse extends BaseResponse {
   recipes: Recipe[];
-  total: number;
-  skip: number;
-  limit: number;
 };

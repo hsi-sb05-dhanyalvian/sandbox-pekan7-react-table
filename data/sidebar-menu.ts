@@ -27,5 +27,27 @@ export const Menus: MenuItem[] = [
       },
     ],
   },
+  {
+    icon: "socials",
+    label: "Socials",
+    path: "",
+    submenu: [
+      {
+        icon: "posts",
+        label: "Posts",
+        path: "/socials/posts",
+      },
+      {
+        icon: "comments",
+        label: "Comments",
+        path: "/socials/comments",
+      },
+      {
+        icon: "quotes",
+        label: "Quotes",
+        path: "/socials/quotes",
+      },
+    ],
+  },
   { icon: "settings", label: "Settings", path: "/settings" },
 ];

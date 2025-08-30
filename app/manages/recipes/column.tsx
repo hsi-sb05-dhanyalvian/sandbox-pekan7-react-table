@@ -6,12 +6,15 @@ import Link from "next/link";
 import Image from "next/image";
 import { ColumnDef } from "@tanstack/react-table";
 import { Recipe } from "./type";
+import { iconSize } from "@/app/column";
+import { Star } from "lucide-react";
 
 export const columns: ColumnDef<Recipe>[] = [
   {
     accessorKey: "image",
     header: "Image",
     size: 130,
+    enableSorting: false,
     cell: ({ row }) => (
       <Image
         priority={true}
@@ -33,7 +36,7 @@ export const columns: ColumnDef<Recipe>[] = [
       return (
         <Link
           href={`/manages/recipes/${id}`}
-          className="hover:underline hover:text-cyan-600"
+          className="hover:underline hover:text-sky-600"
           title={`Detail of ${name}`}
         >
           {name}
@@ -52,9 +55,24 @@ export const columns: ColumnDef<Recipe>[] = [
     size: 140,
   },
   {
+    accessorKey: "rating",
+    header: "Rating",
+    size: 110,
+    cell: ({ row }) => {
+      const rating = row.original.rating;
+      return (
+        <div className="flex items-center gap-1">
+          <Star size={iconSize} className="text-yellow-400" fill="gold" />
+          <span>{rating}</span>
+        </div>
+      );
+    },
+  },
+  {
     accessorKey: "mealType",
     header: "Meal Type",
     size: 170,
+    enableSorting: false,
     cell: ({ row }) => {
       const mealType = row.original.mealType;
       return (
@@ -69,7 +87,8 @@ export const columns: ColumnDef<Recipe>[] = [
   {
     accessorKey: "ingredients",
     header: "Ingredients",
-    size: 360,
+    size: 300,
+    enableSorting: false,
     cell: ({ row }) => {
       const ingredients = row.original.ingredients;
       return (
@@ -78,7 +97,7 @@ export const columns: ColumnDef<Recipe>[] = [
             <li
               key={idx}
               className="table-ul-li"
-              style={{ maxWidth: '360px' }}
+              style={{ maxWidth: '300px' }}
             >
               {ingredient}
             </li>

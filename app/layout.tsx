@@ -1,19 +1,19 @@
 //- app/layout.tsx
 
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Roboto_Flex, Roboto_Mono } from "next/font/google";
 import MainSidebar from "@/components/main-sidebar";
 import MainFooter from "@/components/main-footer";
 import "./globals.css";
 import ReactQueryProvider from "./provider";
 
-const fontSans = Inter({
-  variable: "--font-inter",
+const fontSans = Roboto_Flex({
+  variable: "--font-sans",
   subsets: ["latin"],
 });
 
-const fontMono = JetBrains_Mono({
-  variable: "--font-jetbrains-mono",
+const fontMono = Roboto_Mono({
+  variable: "--font-mono",
   subsets: ["latin"],
 });
 
@@ -34,7 +34,7 @@ export default function RootLayout({
           <div className="flex min-h-screen">
             <MainSidebar />
 
-            <div className="ml-64 px-6 py-4 w-full">
+            <div className="ml-64 px-6 py-4 w-full flex flex-col min-h-screen">
               <main className="flex-1">
                 {children}
               </main>

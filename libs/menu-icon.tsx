@@ -10,7 +10,11 @@ import {
   Barcode,
   CookingPot,
   Users,
-  ChartNoAxesCombined
+  ChartNoAxesCombined,
+  NotebookPen,
+  MessageSquareText,
+  Quote,
+  Globe
 } from "lucide-react";
 
 interface MenuIconProps {
@@ -21,7 +25,6 @@ interface MenuIconProps {
   isOpen?: boolean;
   submenu?: boolean;
   onClick?: () => void;
-  // onClickVal?: boolean;
 };
 
 export const MenuIcon = ({
@@ -114,6 +117,18 @@ const GetIcon = ({ icon, size }: GetIconProps) => {
       break;
     case 'users':
       result = <Users size={size} />;
+      break;
+    case 'socials':
+      result = <Globe size={size} />;
+      break;
+    case 'posts':
+      result = <NotebookPen size={size} />;
+      break;
+    case 'comments':
+      result = <MessageSquareText size={size} />;
+      break;
+    case 'quotes':
+      result = <Quote size={size} />;
       break;
   }
 

@@ -1,6 +1,7 @@
 //- components/table/thead.tsx
 
 import { flexRender, Table } from "@tanstack/react-table";
+import { ArrowDownAZ, ArrowDownZA, ArrowUpAZ, ArrowUpDown } from "lucide-react";
 
 interface TheadProps<TData> {
   table: Table<TData>;
@@ -17,9 +18,8 @@ const Thead = <TData,>({ table }: TheadProps<TData>) => {
           {headerGroup.headers.map((header) => (
             <th
               key={header.id}
-              className="px-3 py-3 first:pl-4 last:pr-4 font-bold"
+              className={`px-3 py-3 first:pl-4 last:pr-4 font-semibold ${header.column.getCanSort() ? 'cursor-pointer' : ''}`}
               style={header.getSize() > 5 ? { width: `${header.getSize()}px` } : undefined}
-              // style={{ width: `${header.getSize()}px` }}
               onClick={
                 header.column.getCanSort()
                   ? header.column.getToggleSortingHandler()
@@ -31,9 +31,15 @@ const Thead = <TData,>({ table }: TheadProps<TData>) => {
                   header.column.columnDef.header,
                   header.getContext()
                 )}
-                {header.column.getIsSorted() && (
+                {header.column.getCanSort() && (
                   <span>
-                    {header.column.getIsSorted() === "asc" ? "🔼" : "🔽"}
+                    {header.column.getIsSorted()
+                      ? header.column.getIsSorted() === "asc"
+                        ? <ArrowUpAZ size={14} className="text-sky-600" />
+                        : <ArrowDownAZ size={14} className="text-sky-600" />
+                      : header.column.getCanSort()
+                        ? <ArrowUpDown size={14} className="text-stone-300" />
+                        : ''}
                   </span>
                 )}
               </div>

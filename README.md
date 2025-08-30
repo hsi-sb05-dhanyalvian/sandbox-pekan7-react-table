@@ -1,7 +1,49 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<center>بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيْمِ</center>
+<br />
+
+# B2/P7: React Table
+Materi pekan ke-7. Membangun Tabel Interaktif Modern dengan TanStack React Table di Next.js.
+
+## Demo
+<a href="https://admin-panel-psi-taupe.vercel.app/" target="_blank">https://admin-panel-psi-taupe.vercel.app/</a>
+
+## Features
+- Grid Table using `React Table` and `React Query`.
+- Global search, sorting by column, pagination (information, action), and custom row.
+- Source data from API `DummyJSON`.
+
+## Pages
+- Dashboard (static).
+- Manages > Products (soon).
+- Manages > Recipes (API).
+- Manages > Users (soon).
+- Socials > Posts (API).
+- Socials > Comments (API).
+- Socials > Quotes (API).
+- Settings (soon).
+
+## Installation
+Install project with npm
+
+```bash
+cd sandbox-pekan6-smart-form
+npm install
+```
+
+## Environment Variables
+To run this project, you will need to add the following environment variables to your .env file
+
+`NEXT_PUBLIC_CONFIG_API_URL`
+
+`NEXT_PUBLIC_CONFIG_API_LIMIT`
+
+`NEXT_PUBLIC_CONFIG_API_DELAY`
+
+`NEXT_PUBLIC_CONFIG_IMAGE_REMOTE`
+
+`NEXT_PUBLIC_CONFIG_NOTIF_TIMEOUT`
 
 ## Getting Started
-
 First, run the development server:
 
 ```bash
@@ -20,17 +62,63 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## Learn More
+## API References
 
-To learn more about Next.js, take a look at the following resources:
+#### URL
+```
+https://dummyjson.com
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+#### Get all recipes
+```http
+GET /recipes/search
+```
+| Parameter | Type     | Required | Description                                               |
+| :-------- | :------- | :------- | :-------------------------------------------------------- |
+| `q`       | `string` | `false`  | param to search by specific column                        |
+| `select`  | `string` | `false`  | param with comma-separated values to select specific data |
+| `limit`   | `number` | `false`  | param to set records per page                             |
+| `skip`    | `number` | `false`  | param to set records to skip                              |
+| `sortBy`  | `string` | `false`  | param to sort by field name                               |
+| `order`   | `string` | `false`  | param to sort order by `asc` or `desc`                    |
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+#### Get all posts
+```http
+GET /posts/search
+```
+| Parameter | Type     | Required | Description                                               |
+| :-------- | :------- | :------- | :-------------------------------------------------------- |
+| `q`       | `string` | `false`  | param to search by specific column                        |
+| `select`  | `string` | `false`  | param with comma-separated values to select specific data |
+| `limit`   | `number` | `false`  | param to set records per page                             |
+| `skip`    | `number` | `false`  | param to set records to skip                              |
+| `sortBy`  | `string` | `false`  | param to sort by field name                               |
+| `order`   | `string` | `false`  | param to sort order by `asc` or `desc`                    |
 
-## Deploy on Vercel
+### Get all comments
+```http
+GET /comments
+```
+| Parameter | Type     | Required | Description                                               |
+| :-------- | :------- | :------- | :-------------------------------------------------------- |
+| `select`  | `string` | `false`  | param with comma-separated values to select specific data |
+| `limit`   | `number` | `false`  | param to set records per page                             |
+| `skip`    | `number` | `false`  | param to set records to skip                              |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Get all quotes
+```http
+GET /quotes
+```
+| Parameter | Type     | Required | Description                                               |
+| :-------- | :------- | :------- | :-------------------------------------------------------- |
+| `select`  | `string` | `false`  | param with comma-separated values to select specific data |
+| `limit`   | `number` | `false`  | param to set records per page                             |
+| `skip`    | `number` | `false`  | param to set records to skip                              |
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Tech Stack
+![Static Badge](https://img.shields.io/badge/NextJS-v15.4.6-whitesmoke?logo=nextdotjs)<br />
+![Static Badge](https://img.shields.io/badge/Tailwind%20CSS-v4.1.12-whitesmoke?logo=tailwindcss)<br />
+![Static Badge](https://img.shields.io/badge/React%20Query-v5.85.3-whitesmoke?logo=reactquery)<br />
+![Static Badge](https://img.shields.io/badge/React%20Table-v0.1.0-whitesmoke?logo=reacttable)<br />
+![Static Badge](https://img.shields.io/badge/Lucide%20React-v0.541.0-whitesmoke?logo=lucide)<br />
+![Static Badge](https://img.shields.io/badge/Axios-v1.11.0-whitesmoke?logo=axios)<br />

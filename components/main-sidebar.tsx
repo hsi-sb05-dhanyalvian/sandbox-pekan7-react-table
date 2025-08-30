@@ -39,8 +39,8 @@ const MainSidebar = () => {
               {menu.submenu ? (
                 <>
                   <MenuIcon
-                    icon="manages"
-                    label="Manages"
+                    icon={menu.icon}
+                    label={menu.label}
                     submenu={true}
                     isActive={isActive}
                     isOpen={isOpen}
