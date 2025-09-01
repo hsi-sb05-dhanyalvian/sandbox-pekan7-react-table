@@ -9,6 +9,7 @@ import { useQuery } from "@tanstack/react-query";
 import { RecipeResponse } from "./type";
 import React from "react";
 import { ScrollToTop } from "@/libs/util";
+import { getMetaPageTitle } from "@/libs/meta";
 
 const ApiRecipes = async (
   page: number,
@@ -37,6 +38,8 @@ const PageManageRecipes = () => {
   const perPage = 10;
 
   React.useEffect(() => {
+    document.title = getMetaPageTitle('Manage Recipes');
+    
     const handler = setTimeout(() => {
       setDebouncedFilter(globalFilter);
     }, 1000);

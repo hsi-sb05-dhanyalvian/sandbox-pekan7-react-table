@@ -1,7 +1,7 @@
 //- components/table/thead.tsx
 
 import { flexRender, Table } from "@tanstack/react-table";
-import { ArrowDownAZ, ArrowDownZA, ArrowUpAZ, ArrowUpDown } from "lucide-react";
+import { ArrowDownAZ, ArrowUpAZ, ArrowUpDown } from "lucide-react";
 
 interface TheadProps<TData> {
   table: Table<TData>;

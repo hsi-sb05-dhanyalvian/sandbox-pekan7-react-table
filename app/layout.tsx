@@ -4,8 +4,9 @@ import type { Metadata } from "next";
 import { Roboto_Flex, Roboto_Mono } from "next/font/google";
 import MainSidebar from "@/components/main-sidebar";
 import MainFooter from "@/components/main-footer";
-import "./globals.css";
 import ReactQueryProvider from "./provider";
+import { getMetaPageDesc, getMetaPageTitle } from "@/libs/meta";
+import "./globals.css";
 
 const fontSans = Roboto_Flex({
   variable: "--font-sans",
@@ -18,8 +19,8 @@ const fontMono = Roboto_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AdminPanel",
-  description: "Headless UI for building powerful tables & datagrids",
+  title: getMetaPageTitle('Dashboard'),
+  description: getMetaPageDesc(),
 };
 
 export default function RootLayout({

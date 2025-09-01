@@ -60,6 +60,30 @@ body {
 .table-icon-td svg {
   @apply text-teal-700;
 }
+.talbe-image-td {
+  @apply object-cover border border-stone-200 rounded-xl;
+}
+
+.badge-1 {
+  @apply inline-flex items-center rounded-xl bg-gray-50
+    text-xs font-medium text-gray-600 inset-ring
+    inset-ring-gray-500/10; 
+}
+.badge-2 {
+  @apply inline-flex items-center rounded-xl bg-red-50
+    text-xs font-medium text-red-700 inset-ring
+    inset-ring-red-600/10;
+}
+.badge-3 {
+  @apply inline-flex items-center rounded-xl bg-blue-50
+    text-xs font-medium text-blue-700 inset-ring
+    inset-ring-blue-700/10;
+}
+.badge-4 {
+  @apply inline-flex items-center rounded-xl bg-yellow-50
+    text-xs font-medium text-yellow-800 inset-ring
+    inset-ring-yellow-600/20;
+}
 
 .disabled {
   @apply bg-white/50 text-gray-500/50;

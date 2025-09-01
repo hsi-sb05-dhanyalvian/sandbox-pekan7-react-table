@@ -3,6 +3,7 @@
 import { BaseResponse } from "@/app/type";
 
 export interface Quote {
+  id: number;
   quote: string;
   author: string;
 }

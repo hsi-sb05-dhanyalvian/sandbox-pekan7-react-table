@@ -1,8 +1,12 @@
+//- app/page.tsx
+
 "use client";
 
+import React from "react";
+import { getMetaPageTitle } from "@/libs/meta";
 import { DollarSign, UserCheck, Users } from "lucide-react";
 
-export default function Dashboard() {
+const PageDashboard = () => {
   const iconSize = 24;
   
   return (
@@ -130,4 +134,6 @@ export default function Dashboard() {
       </div>
     </>
   );
-}
+};
+
+export default PageDashboard;

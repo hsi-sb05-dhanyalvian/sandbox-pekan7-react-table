@@ -4,8 +4,9 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Comment } from "./type";
-import { iconSize, locale } from "@/app/column";
+import { iconSize } from "@/app/column";
 import { ThumbsUp } from "lucide-react";
+import { NumberFormated } from "@/libs/util";
 
 export const columns: ColumnDef<Comment>[] = [
   {
@@ -34,11 +35,11 @@ export const columns: ColumnDef<Comment>[] = [
     header: "Likes",
     size: 100,
     cell: ({ row }) => {
-      const likes = row.original.likes;
+      const likes = NumberFormated(row.original.likes);
       return (
         <div className="table-icon-td">
           <ThumbsUp size={iconSize} />
-          <span>{new Intl.NumberFormat(locale).format(likes)}</span>
+          <span>{likes}</span>
         </div>
       );
     },

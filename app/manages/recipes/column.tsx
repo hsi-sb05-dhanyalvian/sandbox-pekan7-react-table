@@ -3,28 +3,27 @@
 'use client';
 
 import Link from "next/link";
-import Image from "next/image";
 import { ColumnDef } from "@tanstack/react-table";
 import { Recipe } from "./type";
-import { iconSize } from "@/app/column";
-import { Star } from "lucide-react";
+import {
+  actionColumnHeader,
+  actionColumnKey,
+  actionColumnSize,
+  ActionEdit,
+  CellImage,
+  CellRating,
+  imageColumnSize,
+  ratingColumnHeader,
+  ratingColumnSize
+} from "@/app/column";
 
 export const columns: ColumnDef<Recipe>[] = [
   {
     accessorKey: "image",
     header: "Image",
-    size: 130,
+    size: imageColumnSize,
     enableSorting: false,
-    cell: ({ row }) => (
-      <Image
-        priority={true}
-        src={row.original.image}
-        alt={row.original.name}
-        className="object-cover border border-stone-200 rounded-xl"
-        width={72}
-        height={72}
-      />
-    ),
+    cell: ({ row }) => <CellImage src={row.original.image} alt={row.original.name} />,
   },
   {
     accessorKey: "name",
@@ -56,16 +55,10 @@ export const columns: ColumnDef<Recipe>[] = [
   },
   {
     accessorKey: "rating",
-    header: "Rating",
-    size: 110,
+    header: ratingColumnHeader,
+    size: ratingColumnSize,
     cell: ({ row }) => {
-      const rating = row.original.rating;
-      return (
-        <div className="flex items-center gap-1">
-          <Star size={iconSize} className="text-yellow-400" fill="gold" />
-          <span>{rating}</span>
-        </div>
-      );
+      return <CellRating rating={row.original.rating} />;
     },
   },
   {
@@ -104,6 +97,17 @@ export const columns: ColumnDef<Recipe>[] = [
           ))}
           {ingredients.length > 3 ? (<li key={99} className="opacity-75">others...</li>) : ''}
         </ul>
+      );
+    },
+  },
+  {
+    accessorKey: actionColumnKey,
+    header: actionColumnHeader,
+    size: actionColumnSize,
+    enableSorting: false,
+    cell: ({ row }) => {
+      return (
+        <ActionEdit path={`/manages/users/${row.original.id}`} />
       );
     },
   },

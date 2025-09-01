@@ -14,7 +14,11 @@ import {
   NotebookPen,
   MessageSquareText,
   Quote,
-  Globe
+  Globe,
+  QrCode,
+  ScanBarcode,
+  PackageOpen,
+  PackageSearch
 } from "lucide-react";
 
 interface MenuIconProps {
@@ -110,7 +114,7 @@ const GetIcon = ({ icon, size }: GetIconProps) => {
       result = <Settings size={size} />;
       break;
     case 'products':
-      result = <Barcode size={size} />;
+      result = <PackageSearch size={size} />;
       break;
     case 'recipes':
       result = <CookingPot size={size} />;

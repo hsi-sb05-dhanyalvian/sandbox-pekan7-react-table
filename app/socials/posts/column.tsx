@@ -4,8 +4,9 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Post } from "./type";
-import { iconSize, locale } from "@/app/column";
+import { iconSize } from "@/app/column";
 import { Eye, ThumbsDown, ThumbsUp } from "lucide-react";
+import { NumberFormated } from "@/libs/util";
 
 export const columns: ColumnDef<Post>[] = [
   {
@@ -39,10 +40,11 @@ export const columns: ColumnDef<Post>[] = [
     header: "Views",
     size: 120,
     cell: ({ row }) => {
+      const views = NumberFormated(row.original.views);
       return (
         <div className="table-icon-td">
           <Eye size={iconSize} />
-          {new Intl.NumberFormat(locale).format(row.original.views)}
+          {views}
         </div>
       );
     },
@@ -54,15 +56,18 @@ export const columns: ColumnDef<Post>[] = [
     enableSorting: false,
     cell: ({ row }) => {
       const reactions = row.original.reactions;
+      const likes = NumberFormated(reactions.likes);
+      const dislikes = NumberFormated(reactions.dislikes);
+      
       return (
         <div>
           <div className="table-icon-td">
             <ThumbsUp size={iconSize} />
-            <span>{new Intl.NumberFormat(locale).format(reactions.likes)}</span>
+            <span>{likes}</span>
           </div>
           <div className="table-icon-td">
             <ThumbsDown size={iconSize} />
-            <span>{new Intl.NumberFormat(locale).format(reactions.dislikes)}</span>
+            <span>{dislikes}</span>
           </div>
         </div>
       );
