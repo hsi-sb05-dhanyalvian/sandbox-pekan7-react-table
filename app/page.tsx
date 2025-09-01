@@ -3,7 +3,6 @@
 "use client";
 
 import React from "react";
-import { getMetaPageTitle } from "@/libs/meta";
 import { DollarSign, UserCheck, Users } from "lucide-react";
 
 const PageDashboard = () => {
@@ -21,7 +20,6 @@ const PageDashboard = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div className="bg-blue-100 text-blue-500 rounded-full p-2">
-                      {/* <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM12.232 4.023a4.52 4.52 0 011.69 1.492A4.52 4.52 0 0115 6a4.52 4.52 0 011.078-2.485C16.598 2.65 17 2.193 17 2v.001C17 1.838 17 1.667 17 1.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5-.001.076-.002.15-.003.224A.5.5 0 0013.25 1a.5.5 0 00-.001.001C12.83 1.25 12.44 1.705 12.232 2.213a.5.5 0 00-.001.001L10.5 5.5a.5.5 0 00.5.5h2c.276 0 .5-.224.5-.5V3a.5.5 0 00-.5-.5H12a.5.5 0 00-.5-.5zM15 14a3 3 0 11-6 0 3 3 0 016 0zM18.232 12.023a4.52 4.52 0 011.69 1.492A4.52 4.52 0 0121 14a4.52 4.52 0 011.078-2.485C22.598 10.65 23 10.193 23 10v.001C23 9.838 23 9.667 23 9.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5-.001.076-.002.15-.003.224A.5.5 0 0021.25 9a.5.5 0 00-.001.001C20.83 9.25 20.44 9.705 20.232 10.213a.5.5 0 00-.001.001L18.5 13.5a.5.5 0 00.5.5h2c.276 0 .5-.224.5-.5V11a.5.5 0 00-.5-.5H20a.5.5 0 00-.5-.5zM6 14a3 3 0 11-6 0 3 3 0 016 0zM9.232 12.023a4.52 4.52 0 011.69 1.492A4.52 4.52 0 0112 14a4.52 4.52 0 011.078-2.485C13.598 10.65 14 10.193 14 10v.001C14 9.838 14 9.667 14 9.5c0-.828-.672-1.5-1.5-1.5-.828 0-1.5.672-1.5 1.5-.001.076-.002.15-.003.224A.5.5 0 0011.25 9a.5.5 0 00-.001.001C10.83 9.25 10.44 9.705 10.232 10.213a.5.5 0 00-.001.001L8.5 13.5a.5.5 0 00.5.5h2c.276 0 .5-.224.5-.5V11a.5.5 0 00-.5-.5H11a.5.5 0 00-.5-.5z"></path></svg> */}
                       <Users size={iconSize} />
                     </div>
                     <span className="text-sm font-medium text-gray-500">Total Users</span>
@@ -36,7 +34,6 @@ const PageDashboard = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div className="bg-purple-100 text-purple-500 rounded-full p-2">
-                      {/* <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M4 4a2 2 0 00-2 2v8a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zM4 6h12a.5.5 0 01.5.5v2.5H3.5V6.5a.5.5 0 01.5-.5zM4 10.5h12V14a.5.5 0 01-.5.5H4a.5.5 0 01-.5-.5v-3.5zM14 11a1 1 0 100-2 1 1 0 000 2z"></path></svg> */}
                       <DollarSign size={iconSize} />
                     </div>
                     <span className="text-sm font-medium text-gray-500">Revenue</span>
@@ -51,7 +48,6 @@ const PageDashboard = () => {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-3">
                     <div className="bg-green-100 text-green-500 rounded-full p-2">
-                      {/* <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm-1-8a1 1 0 100-2 1 1 0 000 2zm2 0a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"></path></svg> */}
                       <UserCheck size={iconSize} />
                     </div>
                     <span className="text-sm font-medium text-gray-500">New Sign-ups</span>

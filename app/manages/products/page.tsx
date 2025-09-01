@@ -3,7 +3,6 @@
 'use client';
 
 import React from "react";
-import { Metadata } from 'next';
 import { ApiClient } from "@/libs/api";
 import { ProductResponse } from "./type";
 import { ScrollToTop } from "@/libs/util";
