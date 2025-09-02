@@ -54,14 +54,6 @@ export const columns: ColumnDef<Recipe>[] = [
     size: 140,
   },
   {
-    accessorKey: "rating",
-    header: ratingColumnHeader,
-    size: ratingColumnSize,
-    cell: ({ row }) => {
-      return <CellRating rating={row.original.rating} />;
-    },
-  },
-  {
     accessorKey: "mealType",
     header: "Meal Type",
     size: 170,
@@ -98,6 +90,14 @@ export const columns: ColumnDef<Recipe>[] = [
           {ingredients.length > 3 ? (<li key={99} className="opacity-75">others...</li>) : ''}
         </ul>
       );
+    },
+  },
+  {
+    accessorKey: "rating",
+    header: ratingColumnHeader,
+    size: ratingColumnSize,
+    cell: ({ row }) => {
+      return <CellRating rating={row.original.rating} />;
     },
   },
   {

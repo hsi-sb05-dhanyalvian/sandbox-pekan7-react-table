@@ -9,11 +9,11 @@ interface TheadProps<TData> {
 
 const Thead = <TData,>({ table }: TheadProps<TData>) => {
   return (
-    <thead className="bg-teal-50">
+    <thead>
       {table.getHeaderGroups().map((headerGroup) => (
         <tr
           key={headerGroup.id}
-          className="border-b border-b-stone-200 rounded-xl"
+          className="table-tr-th border-b border-b-stone-200 rounded-xl"
         >
           {headerGroup.headers.map((header) => (
             <th

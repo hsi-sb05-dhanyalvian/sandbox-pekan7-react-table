@@ -32,7 +32,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${fontSans.variable} ${fontMono.variable} antialiased`}>
         <ReactQueryProvider>
-          <div className="flex min-h-screen">
+          <div className="main flex min-h-screen">
             <MainSidebar />
 
             <div className="ml-64 px-6 py-4 w-full flex flex-col min-h-screen">

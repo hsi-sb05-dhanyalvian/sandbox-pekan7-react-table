@@ -34,7 +34,7 @@ const GlobalSearch = ({
         value={value}
         onChange={onChange}
         disabled={loading}
-        className="input-text w-full pl-8 pr-10 py-1.5 border border-stone-200 rounded-full text-sm text-stone-500 focus:text-stone-700 focus:outline-none focus:ring-2 focus:ring-stone-100 shadow-xs"
+        className="input-text w-full pl-8 pr-10 py-1.5 bg-white border border-stone-200 rounded-full text-sm text-stone-500 focus:text-stone-700 focus:outline-none focus:ring-2 focus:ring-slate-100 shadow-xs"
       />
 
       {/* Clear Button */}

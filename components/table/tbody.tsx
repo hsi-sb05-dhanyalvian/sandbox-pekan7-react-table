@@ -28,7 +28,7 @@ const Tbody = <TData, TValue>({
         table.getRowModel().rows.map((row) => (
           <tr
             key={row.id}
-            className="bg-white hover:bg-teal-50 border-b border-b-stone-100 last:border-b-0">
+            className="table-tr-td border-b border-b-stone-100 last:border-b-0">
             {row.getVisibleCells().map((cell) => (
               <td
                 key={cell.id}
