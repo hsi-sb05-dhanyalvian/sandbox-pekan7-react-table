@@ -88,21 +88,11 @@ const Pagination = ({
 
   return (
     <div className="inline-flex items-center rounded-full border border-stone-200">
-      {/* First */}
-      <button
-        onClick={() => setPage(1)}
-        disabled={loading || currentPage === 1}
-        className="flex input-button-secondary px-1.5 py-1.5 gap-1 rounded-l-full"
-      >
-        <ChevronsLeft size={iconSize} />
-        <span className="pr-1.5">First</span>
-      </button>
-
       {/* Prev */}
       <button
         onClick={() => setPage(currentPage - 1)}
         disabled={loading || currentPage === 1}
-        className="flex input-button-secondary px-1.5 py-1.5 gap-1"
+        className="flex input-button-secondary px-1.5 py-1.5 gap-1 rounded-l-full"
       >
         <ChevronLeft size={iconSize} />
         <span className="pr-1.5">Prev</span>
@@ -114,20 +104,10 @@ const Pagination = ({
       <button
         onClick={() => setPage(currentPage + 1)}
         disabled={loading || currentPage === totalPages}
-        className="flex input-button-secondary px-1.5 py-1.5 gap-1"
+        className="flex input-button-secondary px-1.5 py-1.5 gap-1 rounded-r-full"
       >
         <span className="pl-1.5">Next</span>
         <ChevronRight size={iconSize} />
-      </button>
-
-      {/* Last */}
-      <button
-        onClick={() => setPage(totalPages)}
-        disabled={loading || currentPage === totalPages}
-        className="flex input-button-secondary px-1.5 py-1.5 gap-1 rounded-r-full"
-      >
-        <span className="pl-1.5">Last</span>
-        <ChevronsRight size={iconSize} />
       </button>
     </div>
   );
