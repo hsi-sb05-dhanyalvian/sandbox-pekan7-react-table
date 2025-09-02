@@ -3,8 +3,6 @@
 import {
   ChevronLeft,
   ChevronRight,
-  ChevronsLeft,
-  ChevronsRight,
   Ellipsis,
 } from "lucide-react";
 

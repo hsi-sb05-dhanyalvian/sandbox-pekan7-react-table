@@ -9,12 +9,12 @@ import { getMetaPageDesc, getMetaPageTitle } from "@/libs/meta";
 import "./globals.css";
 
 const fontSans = Roboto_Flex({
-  variable: "--font-sans",
+  variable: "--font-roboto-flex",
   subsets: ["latin"],
 });
 
 const fontMono = Roboto_Mono({
-  variable: "--font-mono",
+  variable: "--font-roboto-mono",
   subsets: ["latin"],
 });
 
